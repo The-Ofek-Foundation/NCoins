@@ -31,22 +31,29 @@ public class Balance {
 	public boolean usefulWeighing() {
 		Coin.STATE ss1 = null, ss2 = null;
 		boolean allNormalOutside = true;
+		boolean ns1 = false, ns2 = false;
 
 		for (Coin c : coins)
-			if (s1.contains(c))
+			if (s1.contains(c)) {
+				if (c.getState() == Coin.STATE.NORMAL)
+					ns1 = true;
 				if (ss1 == null)
 					ss1 = c.getState();
 				else if (ss1 == Coin.STATE.UNKNOWN
 					|| ss1 == c.getState());
 				else ss1 = Coin.STATE.UNKNOWN;
-			else if (s2.contains(c))
+			} else if (s2.contains(c)) {
+				if (c.getState() == Coin.STATE.NORMAL)
+					ns2 = true;
 				if (ss2 == null)
 					ss2 = c.getState();
 				else if (ss2 == Coin.STATE.UNKNOWN
 					|| ss2 == c.getState());
 				else ss2 = Coin.STATE.UNKNOWN;
-			else if (c.getState() != Coin.STATE.NORMAL)
+			} else if (c.getState() != Coin.STATE.NORMAL)
 				allNormalOutside = false;
+
+		if (ns1 && ns2) return false;
 
 		if (ss1 == Coin.STATE.UNKNOWN || ss2 == Coin.STATE.UNKNOWN)
 			return true;

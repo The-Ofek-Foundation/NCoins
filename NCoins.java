@@ -125,8 +125,10 @@ public class NCoins {
 				// }
 				if (minDepth == depth + 1)
 					return minDepth;
-				if (minDepth < cutoff)
+				if (minDepth < cutoff) {
 					cutoff = minDepth;
+					System.out.println(cutoff);
+				}
 			}
 		}
 		return minDepth;
